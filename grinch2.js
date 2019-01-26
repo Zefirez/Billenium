@@ -1,6 +1,6 @@
 //funkcja generująca pojedynczą sekcję choinki
 
-function branch(width,offTheTop) {
+function branch(width, offTheTop) {
     var offTheTop = offTheTop?offTheTop:0;
     var empty = width-1-offTheTop*2;
     
@@ -24,17 +24,19 @@ function generateLine(width, empty) {
 //
 function tree (width,nrOfSections,offTheTop) {
     var topTrim=0;
+    width+=Math.pow(0,width%2);
     while(nrOfSections>0) {
         branch(width,topTrim);
         topTrim=offTheTop;
         nrOfSections--;
     }
     
-    var trunkWidth = 1+offTheTop*2
+    var trunkWidth = Math.min(1+offTheTop*2,width);
+    var baseWidth = Math.min(trunkWidth*2+1,width);
     for(var i=0;i<3;i++) {
-        if (i==2) {trunkWidth=trunkWidth*2+1;}
+        if (i==2) {trunkWidth=baseWidth;}
         console.log(generateLine(width,width-trunkWidth));
     }
 }
 
-tree(17,3,1);
+tree(12,4,3);
