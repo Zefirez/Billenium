@@ -1,3 +1,5 @@
+'use strict';
+
 function Grinch3(width, sections, offTheTop) {
     
     init();
@@ -12,8 +14,7 @@ function Grinch3(width, sections, offTheTop) {
             trunk();
         }
     }
-
-    
+  
     function filter(){
         switch(false) {
             case Number.isInteger(width) && width>0:
@@ -33,16 +34,13 @@ function Grinch3(width, sections, offTheTop) {
     }
     //wydruk sekcji drzewa
     function section(n,emptySpace) {
-        if (n>0) {
-            emptySpace = emptySpace || width-1;
-            while(emptySpace>0) {
-                console.log(printLine(width,emptySpace));
-                emptySpace-=2;
-            }
-            emptySpace = width-1-offTheTop*2;
-            section(n-1,emptySpace);
+        emptySpace = emptySpace || width-1;
+        while(emptySpace>0) {
+            printLine(width,emptySpace);
+            emptySpace-=2;
         }
-        return true;
+        emptySpace = width-1-offTheTop*2;
+        n>0 && section(n-1,emptySpace);
     }
     
     //wydruk pnia i podstawy
@@ -51,7 +49,7 @@ function Grinch3(width, sections, offTheTop) {
         var baseWidth = Math.min(trunkWidth*2+1,width);
         for(var i=0;i<3;i++) {
             if (i==2) {trunkWidth=baseWidth;}
-            console.log(printLine(width,width-trunkWidth));
+            printLine(width,width-trunkWidth);
         }
     }
     
@@ -60,8 +58,8 @@ function Grinch3(width, sections, offTheTop) {
     function printLine(width, emptySpace){
         var emptySpaceArr = new Array(emptySpace/2).fill(" ").join("");
         var stars = new Array(width-emptySpace).fill("*").join("");
-        return emptySpaceArr+stars;
+        console.log(emptySpaceArr+stars);
     }
 }
 
-Grinch3(22,-6.54,1);
+Grinch3(22,3,1);
